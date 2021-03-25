@@ -99,12 +99,12 @@ void find(const char *path, const char *file) {
 int main(int argc, char *argv[]) {
     if(argc != 3) {
         fprintf(2, "usage %s: <path> <file>\n", argv[0]);
-        exit(1);
+        exit();
     }
 
     // Call find with given args
     filename_size = strlen(argv[2]);
     find(argv[1], argv[2]);
 
-    exit(0);
+    exit();
 }

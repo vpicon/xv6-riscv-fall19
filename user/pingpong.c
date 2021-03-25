@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     int pid;
     if ((pid = fork()) < 0) {
         fprintf(2, "fork error\n");
-        exit(1);
+        exit();
     }
 
     // PingPong byte
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
         printf("%d: received ping\n", getpid());
 
         write(child_fd[1], &msg, 1);
-        exit(0);
+        exit();
     }
 
     // Parent process
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
     printf("%d: received pong\n", getpid());
 
     // Wait for child and exit
-    wait(0);
-    exit(0);
+    wait();
+    exit();
 }
 

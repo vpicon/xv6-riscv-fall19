@@ -11,7 +11,7 @@ void primes(int *parent_fd) {
     int p;
     if (read(parent_fd[0], &p, sizeof(p)) == 0) { // trivial end of recursion
         close(parent_fd[0]);
-        exit(0);
+        exit();
     }
     fprintf(1, "prime %d\n", p);
 
@@ -19,7 +19,7 @@ void primes(int *parent_fd) {
     int child_fd[2];
     if (pipe(child_fd) < 0) {
         fprintf(2, "pipe error\n");
-        exit(1);
+        exit();
     }
 
     int pid;
@@ -51,8 +51,8 @@ void primes(int *parent_fd) {
     close(child_fd[1]);
 
     // wait for child to finish and exit
-    wait(0);
-    exit(0);
+    wait();
+    exit();
 }
 
 
@@ -62,14 +62,14 @@ int main(int argc, char *argv[]) {
     int fd[2];
     if (pipe(fd) < 0) {
         fprintf(2, "pipe error\n");
-        exit(1);
+        exit();
     }
 
     // Create child process
     int pid;
     if ((pid = fork()) < 0) {
         fprintf(2, "fork error\n");
-        exit(1);
+        exit();
     }
 
     // Child process
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
 
 
     // Wait for child and exit
-    wait(0);
-    exit(0);
+    wait();
+    exit();
 }
 
